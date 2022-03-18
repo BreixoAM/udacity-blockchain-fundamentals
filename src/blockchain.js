@@ -36,11 +36,11 @@ class Blockchain {
         let self = this;
         return new Promise(async (resolve, reject) => {
             if (!self._validateTime(message)) {
-                reject('Invalid time message.');
+                return reject('Invalid time message.');
             }
 
             if (!bitcoinMessage.verify(message, address, signature)) {
-                reject('Invalid signature message.');
+                return reject('Invalid signature message.');
             }
 
             let blockData = {
@@ -107,7 +107,7 @@ class Blockchain {
             }
 
             if (errorsLog.length > 0) {
-                reject(errorsLog);
+                return reject(errorsLog);
             }
 
             resolve();
